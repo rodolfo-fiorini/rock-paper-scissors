@@ -18,6 +18,8 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
+//added a comment to try new branch merge
+
 function game() {
     let playerScore = 0;
     let compScore = 0;
