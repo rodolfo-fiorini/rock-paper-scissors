@@ -5,9 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RPS</title>
-    <script src="rock.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="play">
+        <h1>Select your choice to play!</h1>
+        <div class="buttons">
+            <button class="btn" value="rock">Rock</button>
+            <button class="btn" value="paper">Paper</button>
+            <button class="btn" value="scissors">Scissors</button>
+        </div>
+        <button id="restart">Restart</button>
+        <br>
+        <p>Times Won: <span id="score">0</span> our of <span id="times-played"></span></p>
+        <br>
+    </div>
+    <div id="result-section">
+        <p style="font-weight: 700; text-decoration: underline; ">Results</p>
+        <ul id="results">
+
+        </ul>
+    </div>
+    <script src="rock.js"></script>
+
 </body>
 </html>

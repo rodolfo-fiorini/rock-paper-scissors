@@ -5,7 +5,7 @@ function computerPlay() {
     return play;
 }
 
-function playRound(playerSelection, computerSelection) {
+function roundWinner(playerSelection, computerSelection) {
     let computer = computerSelection.toLowerCase()
     let player = playerSelection.toLowerCase()
     if (playerSelection == computerSelection){ //tie
@@ -18,40 +18,98 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
-//added a comment to try new branch merge
-
-function game() {
+let game = function() {
     let playerScore = 0;
     let compScore = 0;
     let round = 1;
-    while (round <= 5) {
-        let playerInput = prompt("Rock, paper or scissors?");
-        let compInput = computerPlay();
-        while (!(outcomes.includes(playerInput))) {
-            playerInput = prompt("Try again: must be rock, paper or scissors.")
-        }
 
-        let roundOutcome = playRound(playerInput, compInput)
-        switch (roundOutcome){
-            case 0:
-                console.log(`Its a tie! Player: ${playerInput} vs Computer: ${compInput}`)
-                round += 1;
-                break;
-            case 1:
-                console.log(`Computer wins! Player: ${playerInput} vs Computer: ${compInput}`)
-                compScore += 1;
-                round += 1;
-                break;
-            case 2:
-                console.log(`Player wins! Player: ${playerInput} vs Computer: ${compInput}`)
-                playerScore += 1;
-                round += 1;
-                break;
-        }
+    let roundOutcome = roundWinner(playerInput, compInput)
+    switch (roundOutcome){
+        case 0:
+            console.log(`Its a tie! Player: ${playerInput} vs Computer: ${compInput}`)
+            round += 1;
+            break;
+        case 1:
+            console.log(`Computer wins! Player: ${playerInput} vs Computer: ${compInput}`)
+            compScore += 1;
+            round += 1;
+            break;
+        case 2:
+            console.log(`Player wins! Player: ${playerInput} vs Computer: ${compInput}`)
+            playerScore += 1;
+            round += 1;
+            break;
     }
+    
 
     return (playerScore < compScore) ? "Computer wins :(" : "Player wins!!!!"
 }
 
-console.log(game());
+let addResult = function (message) {
+    let results = document.getElementById("results")
+    let result = document.createElement('li')
+    result.innerText = message;
+    results.appendChild(result)
+}
+
+
+
+let btn = document.querySelectorAll('button')
+let playerScore = 0;
+let compScore = 0;
+let round = 1;
+let score = document.getElementById('score');
+let total = document.getElementById('total')
+    // determine player input
+btn.forEach((btn) =>{
+    btn.addEventListener("click", 
+    function (){
+        // player and computer input
+        let playerInput = btn.value;
+        let compInput = computerPlay();
+
+        // determine winner
+        
+        let roundOutcome = roundWinner(playerInput, compInput);
+        let message = "";
+        switch (roundOutcome){
+            case 0:
+                message = `Round ${round}: Its a tie! Player: ${playerInput} vs Computer: ${compInput}`;
+                round += 1;
+                break;
+            case 1:
+                message = `Round ${round}: Computer wins! Player: ${playerInput} vs Computer: ${compInput}`;
+                compScore += 1;
+                round += 1;
+                break;
+            case 2:
+                message = `Round ${round}: Player wins! Player: ${playerInput} vs Computer: ${compInput}`;
+                playerScore += 1;
+                score.innerText = "" + (playerScore);
+                round += 1;
+                break;
+        }
+        //add result
+        addResult(message);
+        if (round == 5) {
+            let outcome = (playerScore < compScore) ? "Computer wins :(" : "Player wins!!!!";
+            alert(outcome)
+        }
+    }
+
+)
+}
+)
+
+let restart = document.getElementById('restart')
+
+restart.addEventListener("click", function (){
+    let results = document.getElementById("results")
+    results.innerHTML = "";
+})
+
+
+    
+   
+
 
